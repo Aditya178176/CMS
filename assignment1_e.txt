@@ -1,0 +1,61 @@
+package com.cams;
+
+public class Main {
+    public static void main(String[] args) {
+        while (true) {
+            int choice = UserInput.getInt("Enter your choice[1-3]:\n1. Login\n2. About\n3. Exit\n> ");
+            switch (choice) {
+                case 1:
+                    String username = UserInput.getString("Enter username: ");
+                    String password = UserInput.getString("Enter password: ");
+                    
+                    // Simple hardcoded login check
+                    if (username.equals("admin") && password.equals("pass")) {
+                        System.out.println("Login successful!");
+
+                        DerivedClasses bank = new DerivedClasses();
+                        boolean showMenu = true;
+
+                        while (showMenu) {
+                            System.out.println("\nBanking Dashboard:\n1. Deposit\n2. Withdraw\n3. Check Balance\n4. Logout");
+                            int dashChoice = UserInput.getInt("Enter choice: ");
+                            switch (dashChoice) {
+                                case 1:
+                                    double depositAmount = UserInput.getDouble("Enter amount to deposit: ");
+                                    bank.deposit(depositAmount);
+                                    break;
+                                case 2:
+                                    double withdrawAmount = UserInput.getDouble("Enter amount to withdraw: ");
+                                    bank.withdraw(withdrawAmount);
+                                    break;
+                                case 3:
+                                    System.out.println("Balance: ₹" + bank.getBalance());
+                                    break;
+                                case 4:
+                                    showMenu = false;
+                                    System.out.println("Logged out.");
+                                    break;
+                                default:
+                                    System.out.println("Invalid option!");
+                            }
+                        }
+                    } else {
+                        System.out.println("Invalid credentials.");
+                    }
+                    break;
+
+                case 2:
+                    System.out.println("This is a simple bank management system made using Java and OOP concepts.");
+                    break;
+
+                case 3:
+                    System.out.println("Exiting application. Thank you!");
+                    System.exit(0);
+                    break;
+
+                default:
+                    System.out.println("Invalid choice. Try again.");
+            }
+        }
+    }
+}
